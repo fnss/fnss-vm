@@ -1,29 +1,40 @@
 #!/bin/sh
 #
-# This script downloads and install on a clean Ubuntu 14.04 installation everything required to have FNSS operational along with additional useful packages. 
+# This script downloads and install on a clean Ubuntu 14.04 installation everything
+# required to have FNSS operational along with additional useful packages. 
 #
 # This script requires superuser privileges.
-#
+
+# Variables
 FNSS_VERSION='v0.5.0'
 FNSS_REPO_URL='https://www.github.com/fnss/fnss'
-FNSS_SRC_DIR=${HOME}/fnss-src
-FNSS_DOC_DIR=${HOME}/fnss-doc
-FNSS_BIN_DIR=${HOME}/fnss-bin
+FNSS_DIR=${HOME}/fnss
+FNSS_SRC_DIR=${FNSS_DIR}/fnss-src
+FNSS_DOC_DIR=${FNSS_DIR}/fnss-doc
+FNSS_BIN_DIR=${FNSS_DIR}/fnss-bin
 
-# TODO: Notes
-# I need to configure one NAT and one host-only interface 
-# I may need to do post-download stuff 
-# http://www.brianlinkletter.com/set-up-mininet/
-# https://github.com/mininet/openflow-tutorial/wiki/Set-up-Virtual-Machine
-# http://mininet.org/vm-setup-notes/
+# Notes:
+# A user may want to configure one NAT and one host-only interface so that it can SSH
+# to the VM from the host OS, like it is done with Mininet:
+#  * http://www.brianlinkletter.com/set-up-mininet/
+#  * https://github.com/mininet/openflow-tutorial/wiki/Set-up-Virtual-Machine
+#  * http://mininet.org/vm-setup-notes/
+
+# Set echo
+set -v
+
+# Move to HOME folder
+cd ${HOME}
 
 # Makes sure all packages installed are up-to-date
 sudo apt-get update
 sudo apt-get  -y -q upgrade
 
 # Install generic utilities
-sudo apt-get install zsh curl mtr traceroute tcptraceroute htop screen vim vim-runtime
+sudo apt-get -y -q install zsh curl mtr traceroute tcptraceroute htop screen vim vim-runtime
 
+# Install oh my zsh
+# The shell change may need a reboot to succeed
 curl -L http://install.ohmyz.sh | sh
 
 # Install Python2 utilities and required packages
@@ -32,13 +43,15 @@ sudo apt-get -y -q install python-dev python-scipy python-numpy python-matplotli
 sudo pip install -U --quiet coverage autonetkit numpydoc cheesecake pylint sphinx topzootools virtualenv virtualenvwrapper
 
 # Install Python3 utilities and required packages
+# Do not install Autonetkit because it has a specific dependency on configobj=4.7.2 which is not compatibel with Python 3
 sudo apt-get -y -q install python3 ipython3 python3-pip python3-setuptools cython3 ipython3-notebook ipython3-qtconsole
-sudo apt-get -y -q install python3-dev python3-scipy python3-numpy python3-matplotlib python3-gnuplot python3-mako python3-nose
-sudo pip3 install -U --quiet networkx coverage autonetkit numpydoc cheesecake pylint sphinx topzootools virtualenv virtualenvwrapper
+sudo apt-get -y -q install python3-dev python3-scipy python3-numpy python3-matplotlib python3-mako python3-nose
+sudo pip3 install -U --quiet networkx coverage numpydoc cheesecake pylint sphinx topzootools virtualenv virtualenvwrapper
 
 # Install FNSS core library
-sudo pip install --quiet fnss
-sudo pip3 install --quiet fnss
+# Install Py3 version first so that FNSS scripts are executed with Python2 by default
+sudo pip3 install --quiet -U fnss
+sudo pip install --quiet -U fnss
 
 # Install Mininet
 sudo apt-get -y -q install mininet
@@ -61,7 +74,9 @@ sudo apt-get -y -q install git
 sudo apt-get -y -q install eclipse eclipse-cdt
 
 # Get FNSS source code, build doc and binaries and clean
-git clone ${FNSS_REPO_URL} ${FNSS_DIR}
+mkdir ${FNSS_DIR}
+cd ${FNSS_DIR}
+git clone ${FNSS_REPO_URL} ${FNSS_SRC_DIR}
 cd ${FNSS_SRC_DIR}
 git checkout ${FNSS_VERSION}
 make
@@ -69,7 +84,7 @@ mv ${FNSS_SRC_DIR}/doc ${FNSS_DOC_DIR}
 mv ${FNSS_SRC_DIR}/dist ${FNSS_BIN_DIR}
 make clean
 
-# Install ns-3 prerequisites
+# Install ns-3
 # prerequisites
 # sudo apt-get install gcc g++ python python-dev mercurial bzr gdb valgrind gsl-bin \
 #  libgsl0-dev libgsl0ldbl tcpdump flex bison sqlite sqlite3 libsqlite3-dev libxml2 libxml2-dev \ 
