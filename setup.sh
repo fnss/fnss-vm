@@ -33,6 +33,9 @@ sudo apt-get  -y -q upgrade
 # Install generic utilities
 sudo apt-get -y -q install zsh curl mtr traceroute tcptraceroute htop screen vim vim-runtime
 
+# Install Git
+sudo apt-get -y -q install git 
+
 # Install oh my zsh
 # The shell change may need a reboot to succeed
 curl -L http://install.ohmyz.sh | sh
@@ -43,7 +46,7 @@ sudo apt-get -y -q install python-dev python-scipy python-numpy python-matplotli
 sudo pip install -U --quiet coverage autonetkit numpydoc cheesecake pylint sphinx topzootools virtualenv virtualenvwrapper
 
 # Install Python3 utilities and required packages
-# Do not install Autonetkit because it has a specific dependency on configobj=4.7.2 which is not compatibel with Python 3
+# Do not install Autonetkit because it has a specific dependency on configobj=4.7.2 which is not compatible with Python 3
 sudo apt-get -y -q install python3 ipython3 python3-pip python3-setuptools cython3 ipython3-notebook ipython3-qtconsole
 sudo apt-get -y -q install python3-dev python3-scipy python3-numpy python3-matplotlib python3-mako python3-nose
 sudo pip3 install -U --quiet networkx coverage numpydoc cheesecake pylint sphinx topzootools virtualenv virtualenvwrapper
@@ -66,9 +69,6 @@ sudo apt-get -y -q install default-jdk default-jre ant
 
 # Install C++ API requirements
 sudo apt-get -y -q install doxygen
-
-# Install Git
-sudo apt-get -y -q install git 
 
 # Install Eclipse
 sudo apt-get -y -q install eclipse eclipse-cdt
