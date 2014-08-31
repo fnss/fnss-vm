@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# This script downloads and install on a clean Ubuntu 14.04 installation everything
+# This script downloads and installs on a clean Ubuntu 14.04 installation everything
 # required to have FNSS operational along with additional useful packages. 
 #
 # This script requires superuser privileges.
@@ -68,10 +68,7 @@ sudo mn --test pingall
 sudo apt-get -y -q install default-jdk default-jre ant
 
 # Install C++ API requirements
-sudo apt-get -y -q install doxygen
-
-# Install Eclipse
-sudo apt-get -y -q install eclipse eclipse-cdt
+sudo apt-get -y -q install doxygen clang
 
 # Get FNSS source code, build doc and binaries and clean
 mkdir ${FNSS_DIR}
