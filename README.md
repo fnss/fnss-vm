@@ -41,6 +41,10 @@ To shut down the virtual machine simply exit from the SSH session and type:
 
     $ vagrant halt
 
+Finally, to destroy the virtual machine type:
+
+    $ vagrant destroy
+
 ## Recommended VM configuration
 This section lists a set of recommended configuration parameters although not all are required:
  * Hypervisor: Oracale VirtualBox 4.3.12
