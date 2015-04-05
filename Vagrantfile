@@ -50,7 +50,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   config.vm.provider "virtualbox" do |vb|
       # Set easy to VM name
-      vb.name = "fnss-cm"
+      vb.name = "fnss-vm"
   #   # Assign specfic amount of memory
   #   vb.memory = 2048
   #   # Assign specific number of cores
