@@ -6,7 +6,7 @@
 # This script requires superuser privileges.
 
 # Variables
-FNSS_VERSION='v0.5.0'
+FNSS_VERSION='v0.6.0'
 FNSS_REPO_URL='https://www.github.com/fnss/fnss'
 FNSS_DIR=${HOME}/fnss
 FNSS_SRC_DIR=${FNSS_DIR}/fnss-src

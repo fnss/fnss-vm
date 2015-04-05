@@ -6,7 +6,7 @@
 # This script requires superuser privileges.
 
 # Variables
-FNSS_VERSION='v0.5.0'
+FNSS_VERSION='v0.6.0'
 FNSS_REPO_URL='https://www.github.com/fnss/fnss'
 FNSS_DIR=${HOME}/fnss
 FNSS_SRC_DIR=${FNSS_DIR}/fnss-src
@@ -28,7 +28,7 @@ cd ${HOME}
 
 # Makes sure all packages installed are up-to-date
 sudo apt-get update
-sudo apt-get  -y -q upgrade
+sudo apt-get -y -q upgrade
 
 # Install generic utilities
 sudo apt-get -y -q install zsh curl mtr traceroute tcptraceroute htop screen vim vim-runtime
