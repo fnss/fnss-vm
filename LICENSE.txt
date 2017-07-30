@@ -1,5 +1,5 @@
 FNSS Virtual Machine
-Copyright (C) 2017, Lorenzo Saino and Cosmin Cocora
+Copyright (C) 2014, Lorenzo Saino and Cosmin Cocora
 Contacts: http://fnss.github.io/
 
 This program is free software; you can redistribute it and/or
